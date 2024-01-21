@@ -45,21 +45,17 @@ int main()
 
     while (st <= en)
     {
-        mid = (st + en) / 2; // 6 5 5
-        idx = lower_bound(arr, arr + N, mid) - arr; // 0
-        ll tmp = lower_bound(arr, arr + N, mid + 1) - arr; // 0
-        // cout << "mid : " << mid << " idx : " << idx << '\n';
+        mid = (st + en) / 2;
+        idx = lower_bound(arr, arr + N, mid) - arr;
+        ll tmp = lower_bound(arr, arr + N, mid + 1) - arr;
         if (solve(mid, idx) >= M && solve(mid + 1, tmp) < M) {
             cout << mid;
             return 0;
         } else if (solve(mid, idx) < M) {
-            en = mid - 1; // 5 4 4 4 4 4 4 4 4 4
+            en = mid - 1; 
         } else if (solve(mid, idx) > M) {
             st = mid + 1;
         } 
-        // cout << "st : " << st << " en : " << en << '\n';
     }
-    // cout << "mid : " << mid << '\n';
-    // cout << "idx : " << idx << '\n';
     return 0;
 }
