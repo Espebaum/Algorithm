@@ -16,7 +16,7 @@ typedef long long ll;
 using namespace std;
 
 int N, M;
-int board[20000002];
+int board[500005];
 
 int main()
 {
@@ -26,13 +26,14 @@ int main()
     cin >> N;
     for (int i = 0; i < N; i++) {
         int num; cin >> num;
-        board[num + 10000000]++;
+        board[i] = num; 
     }
+    sort(board, board+N);
 
     cin >> M;
     for (int i = 0; i < M; i++) {
         int num; cin >> num;
-        cout << board[num + 10000000] << ' ';
+        cout << binary_search(board, board+N, num) << ' ';
     }
 
     return 0;
