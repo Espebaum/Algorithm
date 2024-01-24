@@ -31,11 +31,9 @@ int main()
     queue<int> q;
     q.push(N);
 
-    // int time = 0;
     while (!q.empty())
     {
         int cur = q.front(); q.pop();
-        // cout << "cur: " << cur << " val: " << t[cur] << '\n';
         if (cur == K)
             break ;
         for (int move = 1; move <= 3; move++) {
@@ -61,8 +59,6 @@ int main()
             q.push(new_cur);
         }
     }
-    // for (int i = 0; i < K + 1; i++)
-    //     cout << "i: " << i << " val : " << t[i] << '\n';
     cout << t[K] << '\n';
     return 0;
 }
