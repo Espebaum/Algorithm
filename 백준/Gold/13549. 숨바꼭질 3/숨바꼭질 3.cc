@@ -16,7 +16,7 @@ typedef long long ll;
 using namespace std;
 
 int N, K;
-int t[200020];
+// int t[200020];
 int vis[200020];
 
 int main()
@@ -25,40 +25,32 @@ int main()
     cin.tie(NULL); cout.tie(NULL);
     cin >> N >> K;
 
-    fill(t, t+200020, -1);
-    t[N] = 0;
+    // fill(t, t+200020, -1);
+    // t[N] = 0;
+    deque<int> d;
+    d.push_back(N);
     vis[N] = 1;
-    queue<int> q;
-    q.push(N);
 
-    while (!q.empty())
+    while (!d.empty())
     {
-        int cur = q.front(); q.pop();
+        int cur = d.front(); d.pop_front();
         if (cur == K)
             break ;
-        for (int move = 1; move <= 3; move++) {
-            int new_cur;
-            if (move == 1) 
-                new_cur = cur + 1;
-            else if (move == 2)
-                new_cur = cur - 1;
-            else
-                new_cur = cur * 2;
-            if (new_cur < 0 || new_cur > 200000 || vis[new_cur] >= 2)
-                continue ;
-            int value;
-            if (move == 3)
-                value = t[cur];
-            else
-                value = t[cur] + 1;
-            if (t[new_cur] == -1)
-                t[new_cur] = max(t[new_cur], value);
-            else
-                t[new_cur] = min(t[new_cur], value);
-            vis[new_cur]++;
-            q.push(new_cur);
+        if (cur * 2 < 100001 && !vis[cur * 2]) {
+            d.push_front(cur * 2);
+            vis[cur * 2] = vis[cur];
+        }
+        if (cur - 1 >= 0 && !vis[cur - 1]) {
+            d.push_back(cur - 1);
+            vis[cur - 1] = vis[cur] + 1;
+        } 
+        if (cur + 1 < 100001 && !vis[cur + 1]) {
+            d.push_back(cur + 1);
+            vis[cur + 1] = vis[cur] + 1;
         }
     }
-    cout << t[K] << '\n';
+    // for (int i = 0; i < K; i++)
+        // cout << "i: " << i << " val: " << vis[i] << '\n';
+    cout << vis[K] - 1;
     return 0;
 }
