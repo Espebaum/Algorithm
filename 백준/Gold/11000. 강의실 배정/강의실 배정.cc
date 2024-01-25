@@ -27,7 +27,6 @@ bool compare(pair<int,int> a, pair<int,int> b)
 int solve(int k)
 {
     pq.push(vp[0].second);
-
     for (int i = 1; i < vp.size(); i++) {
         pq.push(vp[i].second);
         if (pq.top() <= vp[i].first)
@@ -46,6 +45,5 @@ int main()
         vp.push_back({x, y});
     }
     sort(vp.begin(), vp.end(), compare);
-
     cout << solve(N) << '\n';
 }
