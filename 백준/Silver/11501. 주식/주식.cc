@@ -25,21 +25,16 @@ long long   solve()
     long long check = 0;
     for (int i = N; i >= 2; i--) {
         check = arr[i];
-        // cout << "check: " << check << '\n';
         for (int j = i - 1; j >= 1; j--) {
             if (arr[j] < check) {
-                // cout << "buy\n";
                 stock += 1;
                 sum -= arr[j];
-                // cout << "money after buy: " << sum << '\n';
             } else
                 break ;
         }
-        // cout << "sell\n";
         sum += stock * check;
         i -= stock;
         stock = 0;
-        // cout << "money after sell: " << sum << '\n';
     }
     return sum;
 }
