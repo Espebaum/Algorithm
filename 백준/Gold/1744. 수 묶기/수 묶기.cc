@@ -32,21 +32,14 @@ void    solve1()
             else 
                 psum += pl[i] + pl[i - 1];
         }
-        // cout << "psum: " << psum << '\n';
     }
-    // cout << "psum: " << psum << '\n';
-    // for (int i = 0; i < mi.size(); i++)
-    //     cout << mi[i] << ' ';
-    // cout << '\n';
     for (int i = mi.size() - 1; i >= 0; i -= 2) {
         if (i == 0) {
             msum += mi[i];
         } else {
             msum += mi[i] * mi[i - 1];
         }
-        // cout << "msum: " << msum << '\n';
     }
-    // cout << "msum: " << psum << '\n';
     cout << psum + msum;
 }
 
@@ -54,8 +47,7 @@ bool compare(int a, int b)
 {
     return a > b;
 }
-// 1 2 3 => 7
-// 0 -1 -2 -3
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -74,6 +66,5 @@ int main()
     sort(pl.begin(), pl.end());
     sort(mi.begin(), mi.end(), compare);
     solve1();
-    // cout << max(res1, res2);
     return 0;
 }
