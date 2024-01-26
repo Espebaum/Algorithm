@@ -76,7 +76,7 @@ int main()
     int res;
     int m = fm();
     if (pBroken == 0) {
-    int p = fp();
+        int p = fp();
         if (abs(N - p) < abs(N - m))
             res = p;
         else
@@ -84,7 +84,6 @@ int main()
     } else {
         res = m;
     }
-    // cout << "Res: " <<res <<'\n';
     string s = to_string(res);
     ans += s.length();
     ans += abs(N - res);
