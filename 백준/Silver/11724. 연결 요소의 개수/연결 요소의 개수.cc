@@ -1,49 +1,54 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <string>
+#include <stack>
 #include <queue>
-#include <set>
+#include <deque>
+#include <map>
+#include <list>
+#include <utility>
+#include <cmath>
+#include <tuple>
+#define all(x) (x).begin(), (x).end()
+#define rep(i, a, b) for (int i = (a); i < (b); ++i)
+typedef long long ll;
 using namespace std;
 
-int	p[1010];
+int N, M;
+int board[1010][1010];
+int vis[1010];
 
-int	find(int n) //루트를 찾는 함수
+void    dfs(int k)
 {
-	if (p[n] < 0)
-		return n;
-	p[n] = find(p[n]);
-	return (p[n]);
+    vis[k] = 1;
+    for (int i = 1; i <= N; i++) {
+        if (!vis[i] && board[k][i]) {
+            dfs(i);
+        }
+    }
 }
 
-void	merge(int a, int b) // 두 집합을 합쳐주는 함수
+int main()
 {
-	a = find(a);
-	b = find(b);
-	if (a == b)
-		return;
-	p[b] = a;
-}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    cin >> N >> M;
 
-int main(void)
-{
-	int	N, M;
-	cin >> N >> M;
-	for (int i = 1; i < N + 1; i++)
-		p[i] = -1;
-	for (int i = 0; i < M; i++)
-	{
-		int u, v;
-		cin >> u >> v;
-		merge(u, v);
-	}
-	vector<int> cnt(N+1);
-	for (int i = 1; i <= N; ++i){
-		cnt[find(i)] = 1;
-	}
-	int ans = 0;
-	for (int i = 1; i <= N; ++i)
-		ans += cnt[i];
-	cout << ans;
-}
+    for (int i = 0; i < M; i++)
+    {
+        int x, y; cin >> x >> y;
+        board[x][y] = 1;
+        board[y][x] = 1;
+    }
 
-// 2 -1 -1 3 2 2 -1 5
+    int cnt = 0;
+    for (int i = 1; i <= N; i++) {
+        if (!vis[i]) {
+            dfs(i);
+            cnt++;
+        }
+    }
+    cout << cnt;
+    return 0;
+}
