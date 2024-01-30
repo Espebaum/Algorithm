@@ -32,17 +32,6 @@ void    Floyd()
     }
 }
 
-void    check(int k, int d)
-{
-    if (k == X) {
-        dist.push_back(d);
-        return ;
-    }
-    for (int i = 1; i <= N; i++) {
-
-    }
-}
-
 int main()
 {
     ios_base::sync_with_stdio(false);
