@@ -39,12 +39,11 @@ int main()
     cin >> n >> m;
 
     for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
+        for (int j = 1; j <= n; j++)
             if (i != j)
                 ans[i][j] = INF;
-        }
     }
-
+    
     for (int i = 0; i < m; i++) {
         int p, c, m; cin>>p>>c>>m;
         if (ans[p][c] == 0) 
