@@ -26,8 +26,6 @@ int main()
     for (int i = 1; i <= N; i++) {
         cin >> arr[i];
     }
-    dp[0] = 1;
-
     for (int i = 1; i <= N; i++) {
         int mx = -1;
         for (int k = 1; k < i; k++) {
