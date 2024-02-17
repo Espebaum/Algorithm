@@ -29,7 +29,6 @@ int main()
         adj[p].push_back({w, c});
         adj[c].push_back({w, p});
     }
-
     for (int i = 1; i <= n; i++) {
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
         int d[110];
@@ -39,7 +38,6 @@ int main()
         while (!pq.empty())
         {
             pair<int,int>cur=pq.top();pq.pop();
-            // cur.first => d, cur.second => node
             if (d[cur.second] != cur.first)
                 continue;
             for (int j = 0; j < adj[cur.second].size(); j++) {
