@@ -51,7 +51,6 @@ int virus()
                             continue;
                         board[nx][ny] = 2;
                         vis[nx][ny] = 1;
-                        // ans += 1;
                         tq.push({nx, ny});
                     }
                 }
