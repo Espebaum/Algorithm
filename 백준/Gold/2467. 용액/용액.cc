@@ -32,15 +32,12 @@ int main()
     int l = 0; int r = N - 1;
     while (l < r)
     {
-        // cout << "l: " << l << " r: " << r << '\n';
         int sum = arr[l] + arr[r];
-        // cout << "sum: " << sum << ' ';
         if (abs(sum) < abs(mn)) {
             mn = abs(sum);
             ans1 = arr[l];
             ans2 = arr[r];
         }
-        // cout << "mn: " << mn << '\n';
         if (sum == 0)
             break ;
         if (sum > 0)
