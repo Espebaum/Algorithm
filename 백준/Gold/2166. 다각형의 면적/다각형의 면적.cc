@@ -1,16 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <map>
-#include <list>
-#include <utility>
-#include <cmath>
-#include <tuple>
-#include <iomanip>
+#include <bits/stdc++.h>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
 typedef long long ll;
