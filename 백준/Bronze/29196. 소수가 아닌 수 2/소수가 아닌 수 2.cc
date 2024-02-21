@@ -17,29 +17,25 @@ const int INF = 0x3f3f3f3f;
 using namespace std;
 
 double k;
-
-int gcd(int a, int b)
-{
-    if (b == 0)
-        return a;
-    return gcd(b, a % b);
-}
+double l, p, q;
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cin >> k;
-    int mo = pow(10, 9);
-    double ans = k * mo;
-    if (ans != (int) ans) {
-        cout << "NO";
-        return 0;
+    p = 1; q = 1; l = pow(10, -6);
+    while (1)
+    {
+        double value = (double) p / q;
+        if (abs(value - k) < l)
+            break ;
+        if (value > k)
+            q += 1;
+        else
+            p += 1;
     }
-    int g = gcd(ans, mo);
-    ans /= g;
-    mo /= g;
     cout << "YES\n";
-    cout << ans << ' ' << mo;
+    cout << p << ' ' << q;
     return 0;
 }
