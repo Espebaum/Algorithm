@@ -18,15 +18,17 @@ using namespace std;
 //10^5 = 100000 ( 1<=N<=200000)
 
 int N;
-vector<pair<int,int>>pos;
-int board[10002][10002];
-vector<pair<double,double>>info; // first 기울기, second 거리
+vector<tuple<double,double,int>>pos;
+vector<tuple<double,double,int>>info; // first 기울기, second 거리
 
-bool compare(pair<double,double>a,pair<double,double>b)
+vector<pair<int,int>>line13;
+vector<pair<int,int>>line24;
+
+bool compare(tuple<double,double,int>a,tuple<double,double,int>b)
 {
-    if (a.first == b.first)
-        return a.second < b.second;
-    return a.first < b.first;
+    if (get<0>(a) == get<0>(b))
+        return get<2>(a) < get<2>(b);
+    return get<0>(a) < get<0>(b);
 }
 
 int main()
@@ -34,30 +36,43 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cin >> N;
-    // 관장님은 (5000, 5000)
-    int gx = 5000;
-    int gy = 5000;
     for (int i = 0; i < N; i++) {
-        int x,y; cin>>x>>y;
-        pos.push_back({x+5000, y+5000});
-        board[x+5000][y+5000] = 1;
+        double x,y; cin>>x>>y;
+        int sa;
+        if ((x > 0 && y > 0) || (x > 0 && y == 0))
+            sa = 1;
+        else if ((x < 0 && y > 0) || (x == 0 && y > 0))
+            sa = 2;
+        else if ((x < 0 && y < 0) || (x < 0 && y == 0))
+            sa = 3;
+        else if ((x > 0 && y < 0) || (x == 0 && y < 0))
+            sa = 4;
+        pos.push_back({x, y, sa});
     } 
 
     for (int i = 0; i < N; i++) {
-        int cx = pos[i].first;
-        int cy = pos[i].second;
-        double gi = double (cy - gy) / (cx - gx);
-        double di = sqrt(pow(cx - gx, 2) + pow(cy - gy, 2));
-        info.push_back({gi, di});
+        double cx = get<0>(pos[i]);
+        double cy = get<1>(pos[i]);
+        int cs = get<2>(pos[i]);
+        double gi = double (cy) / (cx);
+        double di = sqrt(pow(cx, 2) + pow(cy, 2));
+        info.push_back({gi, di, cs});
     }
     sort(info.begin(), info.end(), compare);
 
+    int board[4];
     double cur = 1e9;
+    int sa = 1e9;
     int ans = 0;
     for (int i = 0; i < info.size(); i++) {
-        // cout << "기울기: " << info[i].first << " 거리: " << info[i].second << '\n';
-        if (cur != info[i].first) {
-            cur = info[i].first;
+        // cout << "기울기: " << get<0>(info[i]) << " 거리: " << get<1>(info[i]) << " 사분면: "<< get<2>(info[i]) << '\n';
+        if (cur != get<0>(info[i])) {
+            cur = get<0>(info[i]);
+            sa = get<2>(info[i]);
+            ans++;
+        }
+        if (cur == get<0>(info[i]) && sa != get<2>(info[i])) {
+            sa = get<2>(info[i]);
             ans++;
         }
     }
