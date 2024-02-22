@@ -16,8 +16,8 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 using namespace std;
 
-int N, M, K;
-vector<pair<int,string>>vp;
+ll N, M, K;
+vector<string>vp;
 
 int main()
 {
@@ -25,21 +25,17 @@ int main()
     cin.tie(NULL); cout.tie(NULL);
     cin >> N >> M >> K;
     for (int i = 0; i < N; i++){
-        string s; cin>>s;
-        int num = 0;
-        for (int j = 0; j < M; j++) {
-            num += (int)s[j];
-        }
-        vp.push_back({num, s});
+        string s; cin>>s; 
+        sort(s.begin(), s.end());
+        vp.push_back(s);
     }
     sort(vp.begin(), vp.end());
     // for (int i = 0; i < N; i++) {
-        // cout << vp[i].first << ' ' << vp[i].second << '\n';
+    //     cout << vp[i] << '\n';
     // }
     string t;
-    for (int i = 0; i < K; i++) {
-        t += vp[i].second;
-    }
+    for (int i = 0; i < K; i++)
+        t += vp[i];
     sort(t.begin(), t.end());
     cout << t;
     return 0;
