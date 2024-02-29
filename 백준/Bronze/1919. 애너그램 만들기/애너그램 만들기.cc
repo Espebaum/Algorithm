@@ -35,13 +35,8 @@ int main()
         if (str1[i] != str2[i])
             diff.push_back(i);
     }
-    // for (int i = 0; i < diff.size(); i++) {
-        // cout << diff[i] << ' '; 
-    // }
-    // cout << '\n';
-    for (int i = 0; i < diff.size(); i++) {
+    for (int i = 0; i < diff.size(); i++)
         ans += abs(str1[diff[i]]-str2[diff[i]]);
-    }
     cout << ans;
     return 0;
 }
