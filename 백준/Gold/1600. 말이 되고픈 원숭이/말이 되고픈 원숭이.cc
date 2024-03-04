@@ -66,7 +66,7 @@ int main()
                 int ny = cy + dhy[dir];
                 if (nx < 0 || nx >= W || ny < 0 || ny >= H)
                     continue;
-                if (dist[nx][ny][ch] != -1 || dist[nx][ny][ch - 1] != -1 || board[nx][ny])
+                if (dist[nx][ny][ch - 1] != -1 || board[nx][ny])
                     continue;
                 dist[nx][ny][ch - 1] = dist[cx][cy][ch] + 1;
                 q.push({nx,ny,ch-1});
