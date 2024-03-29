@@ -1,17 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <map>
-#include <list>
-#include <utility>
-#include <cmath>
-#include <tuple>
-#define all(x) (x).begin(), (x).end()
-#define rep(i, a, b) for (int i = (a); i < (b); ++i)
+#include <bits/stdc++.h>
 typedef long long ll;
 const int INF = 0x3f3f3f3f;
 using namespace std;
