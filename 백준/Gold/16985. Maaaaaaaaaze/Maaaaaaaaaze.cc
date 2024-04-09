@@ -23,10 +23,8 @@ void    bfs()
                 dis[i][j][k] = -1;
         }
     }
-
     if (co[0][0][0] == 0 || co[4][4][4] == 0)
         return ;
-
     queue<tuple<int,int,int>> q;
     q.push({0, 0, 0});
     dis[0][0][0] = 0;
@@ -97,13 +95,11 @@ void    solve(int k)
 {
     if (t == 12)
         return ;
-
     if (k == 5) {
         copy();
         bfs();
         return ;
     }
-
     for (int i = 0; i <= 3; i++) {
         st[k].second = i;
         solve(k + 1);
@@ -114,12 +110,10 @@ void    force(int k)
 {
     if (t == 12)
         return ;
-
     if (k == 5) {
         solve(0);
         return ;
     }
-
     for (int i = 0; i < 5; i++) {
         if (!s_isused[i]) {
             st[k].first = i;
@@ -134,14 +128,11 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-
     for (int i = 0; i < 5; i++)
         for (int j = 0; j < 5; j++)
             for (int k = 0; k < 5; k++)
                 cin >> b[i][j][k];
-    
     force(0);
-
     if (answers.empty())
         cout << -1;
     else {
