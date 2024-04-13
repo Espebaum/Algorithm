@@ -63,20 +63,12 @@ void    moveB(int dir, int rx, int ry, int bx, int by, int cnt)
 
 void    move(int dir, int rx, int ry, int bx, int by, int cnt)
 {
-    if (blue)
-        return ;
-    if (red) {
-        ans = min(ans, cnt);
-        return ;
-    }
     irx = rx; iry = ry; ibx = bx; iby = by;
     moveR(dir, irx, iry, ibx, iby, cnt);
     moveB(dir, irx, iry, ibx, iby, cnt);
     moveR(dir, irx, iry, ibx, iby, cnt);
     moveB(dir, irx, iry, ibx, iby, cnt);
-    if (blue)
-        return ;
-    if (red) {
+    if (board[irx][iry] == 'O' && board[ibx][iby] != 'O') {
         ans = min(ans, cnt);
         return ;
     }
@@ -87,13 +79,9 @@ void    solve(int rx, int ry, int bx, int by, int cnt)
 {
     if (cnt > 10) return;
     move(0, rx, ry, bx, by, cnt + 1); // 북
-    red = false; blue = false;
     move(1, rx, ry, bx, by, cnt + 1); // 남
-    red = false; blue = false;
     move(2, rx, ry, bx, by, cnt + 1); // 서
-    red = false; blue = false;
     move(3, rx, ry, bx, by, cnt + 1); // 동
-    red = false; blue = false;
 }
 
 int main()
