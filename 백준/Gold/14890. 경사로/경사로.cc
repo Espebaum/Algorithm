@@ -6,8 +6,7 @@ using namespace std;
 
 int board[110][110];
 int saro[110][110];
-int N, L; // L 경사로길이
-// 4 →, 5 ←, 6 ↑ 7 ↓
+int N, L;
 bool cango;
 int ans;
 
@@ -18,7 +17,7 @@ void    ud()
         cango = true;
         for (int r = 0; r < N - 1; r++) {
             if (board[r][c] < board[r + 1][c]) {
-                // 올라가는경사
+                // 올라가는 경사
                 if (board[r][c] + 1 != board[r + 1][c]) {
                     cango = false; break ;
                 }
@@ -42,18 +41,14 @@ void    ud()
                     cango = false; break ;
                 }
                 int cur = board[r + 1][c];
-                // cout << "r: "<< r << " c: " << c << " cur: " << cur << '\n';
                 for (int i = 0; i < L; i++) {
                     if (r + 1 + i >= N || board[r + 1 + i][c] != cur || saro[r + 1 + i][c] == 6 || saro[r + 1 + i][c] == 7) {
-                        // cout << "r+1+i: " << r+1+i << " board[r+1+i][c]: " << board[r+1+i][c] << '\n';
                         cango = false; break ;
                     }
                 }
-                // cout << "r: " << r << " cango: " << cango << '\n';
                 if (!cango)
                     break ;
                 else {
-                    // cout << "c: " << c << '\n';
                     for (int i = 0; i < L; i++) {
                         saro[r + 1 + i][c] = 7;
                     }
@@ -61,7 +56,6 @@ void    ud()
             }
         }
         if (cango) {
-            // cout << "c: " << c << '\n';
             ans += 1;
         }
         else {
@@ -101,7 +95,6 @@ void    lr()
                     cango = false; break ;
                 }
                 int cur = board[r][c + 1];
-                // cout << "cur: " << cur << '\n';
                 for (int i = 0; i < L; i++) {
                     if (c + 1 + i >= N || board[r][c + 1 + i] != cur || saro[r][c + 1 + i] == 4 || saro[r][c + 1 + i] == 5) {
                         cango = false; break ;
@@ -114,10 +107,8 @@ void    lr()
                         saro[r][c + 1 + i] = 5;
             }
         }
-        if (cango) {
-            // cout << "r: " << r << '\n';
+        if (cango)
             ans += 1;
-        }
         else {
             for (int i = 0; i < N; i++)
                 if (saro[r][i] == 4 || saro[r][i] == 5)
@@ -135,16 +126,8 @@ int main()
         for (int j = 0; j < N; j++) 
             cin >> board[i][j];
     }
-
     lr();
     ud();
-
     cout << ans << '\n';
-    // for (int i = 0; i < N; i++) {
-    //     for (int j = 0; j < N; j++) 
-    //         cout << saro[i][j] << ' ';
-    //     cout << '\n';
-    // }   cout << '\n';
-
     return 0;
 }
