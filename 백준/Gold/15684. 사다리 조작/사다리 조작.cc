@@ -36,7 +36,7 @@ bool    solve3()
                 int x1 = cur1.first; int y1 = cur1.second;
                 int x2 = cur2.first; int y2 = cur2.second;
                 int x3 = cur3.first; int y3 = cur3.second;
-                if ((x1 == x2 && abs(y1 - y2) == 1) || (x2 == x3 && abs(y2 - y3) == 1) || (x1 == x3 && abs(y1 - y3) == 1))
+                if ((x1 == x2 && (y1 - y2) == -1) || (x2 == x3 && (y2 - y3) == -1) || (x1 == x3 && (y1 - y3) == -1))
                     continue;
                 board[x1][y1] = y1 + 1; board[x1][y1 + 1] = y1;
                 board[x2][y2] = y2 + 1; board[x2][y2 + 1] = y2;
@@ -60,7 +60,7 @@ bool    solve2()
             pair<int,int>cur2 = zone[j];
             int x1 = cur1.first; int y1 = cur1.second;
             int x2 = cur2.first; int y2 = cur2.second;
-            if (x1 == x2 && (abs(y1 - y2) == 1))
+            if (x1 == x2 && ((y1 - y2) == -1))
                 continue;
             board[x1][y1] = y1 + 1; board[x1][y1 + 1] = y1;
             board[x2][y2] = y2 + 1; board[x2][y2 + 1] = y2;
