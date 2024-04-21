@@ -13,30 +13,17 @@ vector<tuple<int,int,int,int,int>> vt;
 
 void    dragon(int cur)
 {
-    // cout << r << ' ' << c << ' ' << d << ' ' << g << ' ' << cur << '\n';
-
-    // if (cur == 1)
-    //     return ;
-
     if (cur == g + 1)
         return ;
-
     if (cur == 0) {
-        // cout << "cur: " << cur << '\n'; 
         int cd = d;
         board[r][c] = 1;
         int nr = r + dx[d]; int nc = c + dy[d];
         board[nr][nc] = 1;
-        // cout << "r: " << r << " c: " << c << ' ';
-        // cout << "nr: " << nr << " nc: " << nc << ' ';
-        // cout << "cd: " << cd << '\n';
         vt.push_back({r, c, nr, nc, cd});
         dragon(cur + 1);
     }
-    // d 0 ->, d 1 ↑, d 2 ←, d 3 ↓
     else {
-        // cout << "cur: " << cur << '\n';
-        // cout << "vt size: " << vt.size() << '\n';
         int count = vt.size() - 1;
         for (int i = vt.size() - 1; i >= 0; i--) {
             int cr = get<2>(vt[count]);
@@ -47,9 +34,6 @@ void    dragon(int cur)
             int nr = cr + dx[nd]; 
             int nc = cc + dy[nd];
             board[nr][nc] = 1;
-            // cout << "cr: " << cr << " cc: " << cc << ' ';
-            // cout << "nr: " << nr << " nc: " << nc << ' ';
-            // cout << "nd: " << nd << '\n';
             count += 1;
             vt.push_back({cr, cc, nr, nc, nd});
         }
@@ -65,9 +49,7 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        // d 0 ->, d 1 ↑, d 2 ←, d 3 ↓
         cin >> c >> r >> d >> g;
-
         dragon(0);
         vt.clear();
     }
