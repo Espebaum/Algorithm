@@ -17,30 +17,24 @@ int main()
     for (int i = 1; i <= N; i++)
         cin >> arr[i];
 
-
-    dp[1][0] = 1; // mx length
-    dp[1][1] = arr[1]; // mx value
+    dp[1][0] = 1;
+    dp[1][1] = arr[1];
 
     for (int i = 2; i <= N; i++) 
     {
         int mx = -1;
-        for (int j = 1; j < i; j++) {
+        for (int j = 1; j < i; j++)
             if (arr[j] < arr[i])
                 mx = max(mx, dp[j][0]);
-        }
-        if (mx != -1) {
+        if (mx != -1)
             dp[i][0] = mx + 1;
-        }
-        else {
+        else
             dp[i][0] = 1;
-        }
     }
 
     int val = -1;
-
-    for (int i = 1; i <= N; i++) {
+    for (int i = 1; i <= N; i++)
         val = max(val, dp[i][0]);
-    }
 
     cout << val << '\n';
     vector<int>ans;
@@ -48,9 +42,7 @@ int main()
         if (dp[i][0] == val) 
         {
             if (ans.empty()) 
-            {
                 ans.push_back(arr[i]);
-            }
             else if (!ans.empty()) 
             {
                 if (dp[i][0] > ans[ans.size() - 1])
@@ -62,9 +54,8 @@ int main()
         }
     }
 
-    for (int i = ans.size() - 1; i >= 0; i--) {
+    for (int i = ans.size() - 1; i >= 0; i--)
         cout << ans[i] << ' ';
-    }   cout << '\n';
 
     return 0;
 }
