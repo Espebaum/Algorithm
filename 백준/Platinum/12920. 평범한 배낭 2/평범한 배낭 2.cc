@@ -10,8 +10,8 @@ int c[10101]; // 만족도
 int k[10101]; // 개수
 vector<pair<int,int>>vp;
 int dp[10101][10101];
-vector<int>W;
-vector<int>V;
+int W[10101];
+int V[10101];
 
 int main()
 {
@@ -30,8 +30,6 @@ int main()
     }
 
     int nn = vp.size();
-    W.resize(nn+1);
-    V.resize(nn+1);
     for (int i = 1; i <= nn; i++) {
         W[i] = vp[i-1].first;
         V[i] = vp[i-1].second;
