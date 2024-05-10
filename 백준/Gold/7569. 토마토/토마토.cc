@@ -21,9 +21,9 @@ int main()
         for (int j = 0; j < N; j++) {
             for (int k = 0; k < M; k++) {
                 int tmp; cin >> tmp;
-                board[j][k][i] = tmp;
-                if (tmp == 1) q.push({j, k, i});
-                if (tmp == 0) dist[j][k][i] = -1;
+                board[i][j][k] = tmp;
+                if (tmp == 1) q.push({i, j, k});
+                if (tmp == 0) dist[i][j][k] = -1;
             }
         }
     }
@@ -32,19 +32,19 @@ int main()
     {
         tuple<int,int,int>cur = q.front(); q.pop();
         int curX, curY, curZ;
-        curX = get<0>(cur);
-        curY = get<1>(cur);
-        curZ = get<2>(cur);
+        curZ = get<0>(cur);
+        curX = get<1>(cur);
+        curY = get<2>(cur);
         for (int dir = 0; dir < 6; dir++)
         {
+            int nz = curZ + dz[dir];
             int nx = curX + dx[dir];
             int ny = curY + dy[dir];
-            int nz = curZ + dz[dir];
             if (nx < 0 || nx >= N || ny < 0 || ny >= M || nz < 0 || nz >= H) 
                 continue;
-            if (dist[nx][ny][nz] >= 0) continue;
-            dist[nx][ny][nz] = dist[curX][curY][curZ] + 1;
-            q.push({nx,ny,nz});
+            if (dist[nz][nx][ny] >= 0) continue;
+            dist[nz][nx][ny] = dist[curZ][curX][curY] + 1;
+            q.push({nz,nx,ny});
         }
     }
 
@@ -52,10 +52,10 @@ int main()
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < N; j++) {
             for (int k = 0; k < M; k++) {
-                if (dist[j][k][i] == -1) {
+                if (dist[i][j][k] == -1) {
                     cout << -1 << '\n'; return 0;
                 }
-                ans = max(ans, dist[j][k][i]);
+                ans = max(ans, dist[i][j][k]);
             }
         }
     }
