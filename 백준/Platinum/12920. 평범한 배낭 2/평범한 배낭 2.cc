@@ -9,7 +9,7 @@ int v[10101]; // 무게
 int c[10101]; // 만족도
 int k[10101]; // 개수
 vector<pair<int,int>>vp;
-int dp[2020][10101];
+int dp[1910][10101];
 int W[10101];
 int V[10101];
 
