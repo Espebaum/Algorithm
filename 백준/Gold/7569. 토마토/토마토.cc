@@ -1,14 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <stack>
-#include <queue>
-#include <tuple>
-#include <deque>
-#include <map>
-#include <list>
-#include <utility>
+#include <bits/stdc++.h>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
 using namespace std;
@@ -19,7 +9,7 @@ int dy[6] = {1, -1, 0, 0, 0, 0};
 int dz[6] = {0, 0, 0, 0, 1, -1};
 int board[103][103][103];
 int dist[103][103][103];
-queue<pair<int, pair<int, int> > > q;
+queue<tuple<int,int,int>> q;
 
 int main()
 {
@@ -27,16 +17,12 @@ int main()
     cin.tie(NULL); cout.tie(NULL);
     cin >> M >> N >> H;
 
-    for (int i = 0; i < H; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            for (int k = 0; k < M; k++)
-            {
-                int tmp;
-                cin >> tmp;
+    for (int i = 0; i < H; i++) {
+        for (int j = 0; j < N; j++) {
+            for (int k = 0; k < M; k++) {
+                int tmp; cin >> tmp;
                 board[j][k][i] = tmp;
-                if (tmp == 1) q.push(make_pair(j, make_pair(k, i)));
+                if (tmp == 1) q.push({j, k, i});
                 if (tmp == 0) dist[j][k][i] = -1;
             }
         }
@@ -44,11 +30,11 @@ int main()
 
     while (!q.empty())
     {
-        pair<int, pair<int, int> > cur = q.front(); q.pop();
+        tuple<int,int,int>cur = q.front(); q.pop();
         int curX, curY, curZ;
-        curX = cur.first;
-        curY = cur.second.first;
-        curZ = cur.second.second;
+        curX = get<0>(cur);
+        curY = get<1>(cur);
+        curZ = get<2>(cur);
         for (int dir = 0; dir < 6; dir++)
         {
             int nx = curX + dx[dir];
@@ -58,20 +44,16 @@ int main()
                 continue;
             if (dist[nx][ny][nz] >= 0) continue;
             dist[nx][ny][nz] = dist[curX][curY][curZ] + 1;
-            q.push(make_pair(nx, make_pair(ny, nz)));
+            q.push({nx,ny,nz});
         }
     }
 
     int ans = 0;
-    for (int i = 0; i < H; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            for (int k = 0; k < M; k++)
-            {
+    for (int i = 0; i < H; i++) {
+        for (int j = 0; j < N; j++) {
+            for (int k = 0; k < M; k++) {
                 if (dist[j][k][i] == -1) {
-                    cout << -1 << '\n';
-                    return 0;
+                    cout << -1 << '\n'; return 0;
                 }
                 ans = max(ans, dist[j][k][i]);
             }
