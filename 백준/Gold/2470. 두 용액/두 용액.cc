@@ -1,15 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <map>
-#include <list>
-#include <utility>
-#include <cmath>
-#include <tuple>
+#include <bits/stdc++.h>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
 typedef long long ll;
@@ -28,10 +17,8 @@ int main()
     for (int i = 1; i <= N; i++)
         cin >> arr[i];
     sort(arr+1, arr+N+1);
-    int start = 1;
-    int end = N;
-    int first;
-    int second;
+    int start = 1; int end = N;
+    int first, second;
     int mn = 2147483647;
 
     while (start < end)
