@@ -28,7 +28,6 @@ void    seeType1(int k)
 {
     int cx = get<0>(vt[k]);
     int cy = get<1>(vt[k]);
-    // y += 1;
     if (arr[k] == 0) {
         while (1) {
             cy++;
@@ -38,7 +37,6 @@ void    seeType1(int k)
                 temp[cx][cy] = 7;
         }
     }
-    // x += 1;
     else if (arr[k] == 1) {
         while (1) {
             cx++;
@@ -48,7 +46,6 @@ void    seeType1(int k)
                 temp[cx][cy] = 7;
         }
     } 
-    // y -= 1;
     else if (arr[k] == 2) {
         while (1) {
             cy--;
@@ -58,7 +55,6 @@ void    seeType1(int k)
                 temp[cx][cy] = 7;
         }
     }
-    // x -= 1;
     else if (arr[k] == 3) {
         while (1) {
             cx--;
@@ -74,7 +70,6 @@ void    seeType2(int k)
 {
     int cx = get<0>(vt[k]);
     int cy = get<1>(vt[k]);
-    // y += 1, y -= 1;
     if (arr[k] == 0) {
         int cy1 = cy; int cy2 = cy;
         while (1) {
@@ -92,7 +87,6 @@ void    seeType2(int k)
                 temp[cx][cy2] = 8;
         }
     }
-    // x += 1, x -= 1;
     else if (arr[k] == 1) {
         int cx1 = cx; int cx2 = cx;
         while (1) {
@@ -116,7 +110,6 @@ void    seeType3(int k)
 {
     int cx = get<0>(vt[k]);
     int cy = get<1>(vt[k]);
-    // x -= 1, y += 1;
     if (arr[k] == 0) {
         while (1) {
             cx--;
@@ -134,7 +127,6 @@ void    seeType3(int k)
                 temp[cx][cy] = 9;
         }
     }
-    // x += 1, y += 1;
     else if (arr[k] == 1) {
         while (1) {
             cx++;
@@ -152,7 +144,6 @@ void    seeType3(int k)
                 temp[cx][cy] = 9;
         }
     }
-    // x += 1, y -= 1;
     else if (arr[k] == 2) {
         while (1) {
             cx++;
@@ -170,7 +161,6 @@ void    seeType3(int k)
                 temp[cx][cy] = 9;
         }
     }
-    // x -= 1, y -= 1;
     else if (arr[k] == 3) {
         while (1) {
             cx--;
@@ -194,7 +184,6 @@ void    seeType4(int k)
 {
     int cx = get<0>(vt[k]);
     int cy = get<1>(vt[k]);
-    // x -= 1, y += 1, y -= 1;
     if (arr[k] == 0) {
         int cy1 = cy; int cy2 = cy;
         while (1) {
@@ -219,7 +208,6 @@ void    seeType4(int k)
                 temp[cx][cy] = 10;
         }
     }
-    // x += 1, x -= 1, y += 1;
     else if (arr[k] == 1) {
         int cx1 = cx; int cx2 = cx;
         while (1) {
@@ -244,7 +232,6 @@ void    seeType4(int k)
                 temp[cx][cy] = 10;
         }
     }
-    // x += 1, y += 1, y -= 1;
     else if (arr[k] == 2) {
         int cy1 = cy; 
         int cy2 = cy;
@@ -271,7 +258,6 @@ void    seeType4(int k)
                 temp[cx][cy] = 10;
         }
     }
-    // x += 1, x -= 1, y -= 1;
     else if (arr[k] == 3) {
         int cx1 = cx; int cx2 = cx;
         while (1) {
@@ -362,24 +348,11 @@ void    watch()
         }   
     }
     mx = min(mx, count);
-    // if (count == 4) {
-    //     cout << "count: " << count << "\n";
-    //     for (int i = 0; i < N; i++) {
-    //         for (int j = 0; j < M; j++) {
-    //             cout << temp[i][j] << ' ';
-    //         }   
-    //         cout << '\n';
-    //     }
-    // }
 }
 
 void    solve(int k)
 {
     if (k == len) {
-        // cout << "ARR\n";
-        // for (int i = 0; i < len; i++) {
-        //     cout << arr[i] << ' ';
-        // }   cout << "\n\n";
         watch();
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
