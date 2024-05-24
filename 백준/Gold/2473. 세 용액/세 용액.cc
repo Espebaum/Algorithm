@@ -6,7 +6,7 @@ const int INF = 0x3f3f3f3f;
 using namespace std;
 
 ll N;
-ll arr[101010];
+ll arr[5050];
 
 int main()
 {
