@@ -40,10 +40,7 @@ int main()
             idx = 0;
         if (words[idx] == target[tidx]) {
             tidx++;
-            if (turn != 0)
-                ans += turn;
-            else
-                ans += N;
+            ans += turn;
             turn = 0;
         }
 
