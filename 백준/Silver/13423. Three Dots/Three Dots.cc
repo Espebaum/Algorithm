@@ -1,4 +1,15 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <map>
+#include <list>
+#include <utility>
+#include <cmath>
+#include <tuple>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
 typedef long long ll;
@@ -23,28 +34,22 @@ int main()
         for (int i = 0; i < N; i++)
             cin >> dots[i];
         sort(dots.begin(), dots.end());
-        for (int i = 0; i < N - 2; i++) {
+        for (int i = 0; i < N - 2; i++) { // N-2
             for (int j = i + 1; j < N - 1; j++) {
                 int target = dots[j] * 2 - dots[i];
                 int st = j + 1;
-                int en = dots.size() - 1;
+                int en = N - 1;
                 while (st <= en)
                 {
-                    if (st == en) {
-                        if (dots[j] - dots[i] == dots[st] - dots[j]) {
-                            ans += 1; 
-                        }
+                    int mid = st + (en - st) / 2;
+                    if (dots[mid] == target) {
+                        ans += 1; 
                         break ;
                     }
-                    int mid = (st + en) / 2;
                     if (dots[mid] < target)
                         st = mid + 1;
                     else if (dots[mid] > target) 
-                        en = mid;
-                    else {
-                        ans += 1;
-                        break ;
-                    }
+                        en = mid - 1;
                 }
             } 
         }
