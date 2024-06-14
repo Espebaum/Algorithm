@@ -1,15 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <map>
-#include <list>
-#include <utility>
-#include <cmath>
-#include <tuple>
+#include <bits/stdc++.h>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
 typedef long long ll;
@@ -34,10 +23,7 @@ int main()
         for (int i = 0; i < N; i++)
             cin >> dots[i];
         sort(dots.begin(), dots.end());
-        // for (int i = 0; i < N; i++)
-        //     cout << dots[i]<< ' ';
-        // cout << '\n';
-        for (int i = 0; i < N - 2; i++) { // N-2
+        for (int i = 0; i < N - 2; i++) {
             for (int j = i + 1; j < N - 1; j++) {
                 int target = dots[j] * 2 - dots[i];
                 int st = j + 1;
@@ -51,17 +37,11 @@ int main()
                         break ;
                     }
                     int mid = (st + en) / 2;
-                    // cout << "mid: " << mid << '\n';
-                    // cout << "dots[mid]: " << dots[mid] << '\n';
-                    // cout << "target: " << target << "\n\n";
                     if (dots[mid] < target)
                         st = mid + 1;
                     else if (dots[mid] > target) 
                         en = mid;
                     else {
-                        // cout << "dots[i]: " << dots[i] << ' ';
-                        // cout << "dots[j]: " << dots[j] << ' ';
-                        // cout << "dots[k]: " << dots[mid] << '\n';
                         ans += 1;
                         break ;
                     }
