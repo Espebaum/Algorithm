@@ -1,54 +1,45 @@
-// #include <bits/stdc++.h>
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <list>
-#include <iterator>
-// #include <queue>
-// #include <deque>
+#include <bits/stdc++.h>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
-#define sz(x) (int)(x).size()
+#define int long long
+const int INF = 0x3f3f3f3f;
 using namespace std;
-using vi = vector<int>;
 
-void solve() {
-    int a, b;cin>>a>>b;
-    vi ans;
+int N, K;
+list<int>l;
+vector<int>v;
 
-    list<int> c;
-    for(int i = 1;i <= a; ++i){
-        c.push_back(i);
-    }
-    auto cur = prev(c.end());
-    while(a--){
-        rep(i, 0, b){
-            cur++;
-            if(cur == c.end())
-                cur = c.begin();
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+    cin >> N >> K;
+
+    for (int i = 1; i <= N; i++)
+        l.push_back(i);
+    auto cursor = l.begin();
+
+    while (!l.empty())
+    {
+        for (int i = 1; i < K ; i++) {
+            cursor++;
+            if (cursor == l.end())
+                cursor = l.begin();
         }
-        ans.push_back(*cur);
-        cur = prev(c.erase(cur));
+        v.push_back(*cursor);
+        cursor = l.erase(cursor);
+        if (cursor == l.end())
+            cursor = l.begin();
     }
 
-    cout<<'<';
-    rep(i, 0, sz(ans)) {
-        cout<<ans[i];
-        if(i != sz(ans)-1)
-            cout<<", ";
+    cout << "<";
+    for (int i = 0; i < v.size(); i++){
+        cout << v[i];
+        if (i != v.size() - 1)
+            cout << ", ";
     }
-    cout<<'>';
-    //12345671234567
-}
+    cout << ">";
 
-
-int main()
-{   
-    ios::sync_with_stdio(0);cin.tie(0);
-
-    //int tc; cin>>tc;
-    //while(tc--)
-        solve();
     return 0;
 }
