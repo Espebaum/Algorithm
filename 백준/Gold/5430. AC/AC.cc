@@ -1,116 +1,95 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <map>
-#include <list>
-#include <utility>
-#include <sstream>
+#include <bits/stdc++.h>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
+// #define int long long
+const int INF = 0x3f3f3f3f;
 using namespace std;
 
 int tc;
+int siz; 
+deque<int>d;
+string c;
+int r_flag = 0;
 
-//1234
-//1234
-
-void    reverseDiscard(deque<int>& d, string s)
+void    move()
 {
-    int r_flag = 0;
-
-    for (int i = 0; i < s.length(); i++)
+    r_flag = 0;
+    for (size_t i = 0; i < c.length(); i++) 
     {
-        if (s[i] == 'R')
-        {
+        if (c[i] == 'R') {
             if (r_flag == 0)
                 r_flag = 1;
             else
                 r_flag = 0;
         }
-        else if (s[i] == 'D')
-        {
-            if (d.size() == 0)
-            {
+        else {
+            if (d.empty()) {
                 cout << "error\n";
-                return;
+                return ;
             }
-            if (r_flag == 0)
-                d.pop_front();
-            else
-                d.pop_back();
+            else {
+                if (r_flag == 0)
+                    d.pop_front();
+                else
+                    d.pop_back();
+            }
         }
     }
-    
-    cout << "[";
-    if (r_flag == 0)
-    {
-        for (int i = 0; i < d.size(); i++)
-        {
-            cout << d[i];
-            if (i != d.size() - 1)
-                cout << ',';
+
+    if (!d.empty()) {
+        cout << "[";
+        if (r_flag == 0) {
+            for (size_t i = 0; i < d.size(); i++) {
+                cout << d[i];
+                if (i != d.size() - 1)
+                    cout << ",";
+            }
+        } else {
+            int size = d.size() - 1;
+            for (int i = size; i >= 0; i--) {
+                cout << d[i];
+                if (i != 0)
+                    cout << ",";
+            }
         }
+        cout << "]\n";
+        d.clear();
+    } else {
+        cout << "[]\n";
     }
-    else
-    {
-        for (int i = d.size() - 1; i >= 0; i--)
-        {
-            cout << d[i];
-            if (i != 0)
-                cout << ',';
-        }    
-    }
-    cout << "]\n";
 }
 
-void    solve()
-{
-    string  s; cin >> s;
-    int size; cin >> size;
-
-    string  tmp; cin >> tmp;
-    deque<int> d;
-
-    string n = "";
-    for (int i = 0; i < tmp.length(); i++) 
-    {
-        if (tmp[i] == '[' || tmp[i] == ']')
-            continue ;
-        else if (tmp[i] == ',')
-        {
-            if (n != "")
-            {
-                int number = stoi(n);
-                d.push_back(number);
-            }
-            n = "";
-        }
-        else
-        {
-            n.push_back(tmp[i]);
-            if (i == tmp.size() - 2)
-            {
-                int number = stoi(n);
-                d.push_back(number);
-            }
-        }
-    }
-
-    reverseDiscard(d, s);
-}
-
-int main()
+signed main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cin >> tc;
 
     while (tc--)
-        solve();
-
+    {
+        cin >> c;
+        cin >> siz;
+        string l; cin >> l;
+        if (siz != 0) {
+            int flag = 0;
+            int num = -1;
+            for (size_t i = 0; i < l.size(); i++) {           
+                if (l[i] - '0' >= 0 && l[i] - '0' <= 9) {
+                    if (flag == 0) {
+                        num = 0;
+                        flag = 1;
+                        num = (10 * num) + (l[i] - '0');
+                    }
+                    else
+                        num = (10 * num) + (l[i] - '0');
+                } else {
+                    if (num != -1)
+                        d.push_back(num);
+                    flag = 0;
+                }
+            }
+        }
+        move();
+    }
     return 0;
 }
