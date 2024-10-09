@@ -35,28 +35,23 @@ void    move()
             }
         }
     }
-
-    if (!d.empty()) {
-        cout << "[";
-        if (r_flag == 0) {
-            for (size_t i = 0; i < d.size(); i++) {
-                cout << d[i];
-                if (i != d.size() - 1)
-                    cout << ",";
-            }
-        } else {
-            int size = d.size() - 1;
-            for (int i = size; i >= 0; i--) {
-                cout << d[i];
-                if (i != 0)
-                    cout << ",";
-            }
+    cout << "[";
+    if (r_flag == 0) {
+        for (size_t i = 0; i < d.size(); i++) {
+            cout << d[i];
+            if (i != d.size() - 1)
+                cout << ",";
         }
-        cout << "]\n";
-        d.clear();
     } else {
-        cout << "[]\n";
+        int size = d.size() - 1;
+        for (int i = size; i >= 0; i--) {
+            cout << d[i];
+            if (i != 0)
+                cout << ",";
+        }
     }
+    cout << "]\n";
+    d.clear();
 }
 
 signed main()
