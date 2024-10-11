@@ -1,25 +1,18 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <map>
-#include <list>
-#include <utility>
+#include <bits/stdc++.h>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
+#define int long long
+const int INF = 0x3f3f3f3f;
 using namespace std;
 
-string  s;
+string s;
 stack<char> st;
 
-int main()
+signed main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    cin>>s;
+    cin >> s;
     int sum = 0;
     int num = 1;
 
@@ -28,43 +21,31 @@ int main()
         if (s[i] == '(') {
             num *= 2;
             st.push(s[i]);
-        }
-        else if (s[i] == '[') {
+        } else if (s[i] == '[') {
             num *= 3;
             st.push(s[i]);
-        }
-        else if (s[i] == ')') {
+        } else if (s[i] == ')') {
             if (st.empty() || st.top() != '(') {
-                cout << 0;
-                return 0;
-            }
+                cout << 0; return 0;
+            } 
             if (s[i - 1] == '(')
-            {
                 sum += num;
-            }
             st.pop();
             num /= 2;
-        }
-        else {
+        } else if (s[i] == ']') {
             if (st.empty() || st.top() != '[') {
                 cout << 0;
                 return 0;
             }
             if (s[i - 1] == '[')
-            {
                 sum += num;
-            }
             st.pop();
             num /= 3;
         }
     }
-
     if (st.empty())
         cout << sum;
     else
         cout << 0;
+    return 0;
 }
-
-//       ( ( ) [ [  ]  ]  )  (  [  ]  ) 
-// sum 0     4      22             28 
-// num 1 2 4 2 6 18 6  2  1  2  6  2  1
