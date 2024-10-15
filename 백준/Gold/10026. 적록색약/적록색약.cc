@@ -1,134 +1,71 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <queue>
-#include <deque>
-#include <utility>
+#include <bits/stdc++.h>
 #define all(x) (x).begin(), (x).end()
 #define rep(i, a, b) for (int i = (a); i < (b); ++i)
+#define int long long
+const int INF = 0x3f3f3f3f;
 using namespace std;
 
-string  board[102];
-int     vis[102][102];
-int     dx[4] = {1, 0, -1, 0};
-int     dy[4] = {0, 1, 0, -1};
-int     N, res, res_weak;
+char    board[101][101];
+int vis[101][101];
+int     N;
+int dx[4] = {1, 0, -1, 0};
+int dy[4] = {0, 1, 0, -1};
+int point;
 
-void	R_dfs(int x, int y)
+void    bfs(int w)
 {
-	vis[x][y] = 1;
-	for (int dir = 0; dir < 4; dir++)
-	{
-		int nx = x + dx[dir];
-		int ny = y + dy[dir];
-		if (nx < 0 || nx >= N || ny < 0 || ny >= N)
-			continue;
-		if (vis[nx][ny] == 0 && board[nx][ny] == 'R')
-			R_dfs(nx, ny);
-	}
+    queue<pair<int,int>>q;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (!vis[i][j]) {
+                point++;
+                char p = board[i][j];
+                vis[i][j] = 1;
+                q.push({i, j});
+                while (!q.empty()) {
+                    pair<int,int>cur = q.front(); q.pop();
+                    for (int dir = 0; dir < 4; dir++) {
+                        int nx = cur.first + dx[dir];
+                        int ny = cur.second + dy[dir];
+                        if (nx < 0 || nx >= N || ny < 0 || ny >= N)
+                            continue;
+                        if (w == 0) {
+                            if (vis[nx][ny] || board[nx][ny] != p)
+                                continue;
+                        } else {
+                            if (p == 'B') {
+                                if (vis[nx][ny] || board[nx][ny] != p)
+                                    continue ;
+                            } else {
+                                if (vis[nx][ny] || board[nx][ny] == 'B')
+                                    continue ;
+                            }
+                        }
+                        vis[nx][ny] = 1;
+                        q.push({nx, ny});
+                    }
+                }
+            }
+        }
+    }
 }
 
-void	G_dfs(int x, int y)
+signed main()
 {
-	vis[x][y] = 1;
-	for (int dir = 0; dir < 4; dir++)
-	{
-		int nx = x + dx[dir];
-		int ny = y + dy[dir];
-		if (nx < 0 || nx >= N || ny < 0 || ny >= N)
-			continue;
-		if (vis[nx][ny] == 0 && board[nx][ny] == 'G')
-			G_dfs(nx, ny);
-	}
-}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
 
-void	B_dfs(int x, int y)
-{
-	vis[x][y] = 1;
-	for (int dir = 0; dir < 4; dir++)
-	{
-		int nx = x + dx[dir];
-		int ny = y + dy[dir];
-		if (nx < 0 || nx >= N || ny < 0 || ny >= N)
-			continue;
-		if (vis[nx][ny] == 0 && board[nx][ny] == 'B')
-			B_dfs(nx, ny);
-	}
-}
-
-void	RG_dfs(int x, int y)
-{
-	vis[x][y] = 1;
-	for (int dir = 0; dir < 4; dir++)
-	{
-		int nx = x + dx[dir];
-		int ny = y + dy[dir];
-		if (nx < 0 || nx >= N || ny < 0 || ny >= N)
-			continue;
-		if (vis[nx][ny] == 0 && (board[nx][ny] == 'R' || board[nx][ny] == 'G'))
-			RG_dfs(nx, ny);
-	}
-}
-
-void	dfs(int x, int y)
-{
-	vis[x][y] = 1; 
-	if (board[x][y] == 'R')
-		R_dfs(x, y);
-	else if (board[x][y] == 'G')
-		G_dfs(x, y);
-	else if (board[x][y] == 'B')
-		B_dfs(x, y);
-}
-
-void	dfs_weak(int x, int y)
-{
-	vis[x][y] = 1;
-	if (board[x][y] == 'R' || board[x][y] == 'G')
-		RG_dfs(x, y);
-	else if (board[x][y] == 'B')
-		B_dfs(x, y);	
-}
-
-int main()
-{
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-
-	cin>>N;
-	res = 0;
-	res_weak = 0;
-	for (int i = 0; i < N; i++)
-		cin>>board[i];
-
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			if (vis[i][j] == 0)
-			{
-				dfs(i, j);
-				res++;
-			}
-		}
-	}
-
-	for (int i = 0; i < N; i++)
-		for (int j = 0; j < N; j++)
-			vis[i][j] = 0;
-
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			if (vis[i][j] == 0)
-			{
-				dfs_weak(i, j);
-				res_weak++;
-			}
-		}
-	}
-	cout<<res<<' '<<res_weak;
-	return (0);
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++)
+            cin >> board[i][j];
+    }
+    bfs(0);
+    cout << point << ' '; point = 0;
+    for (int i = 0; i < 100; i++)
+        for (int j = 0; j < 100; j++)
+            vis[i][j] = 0;
+    bfs(1);
+    cout << point << '\n';
+    return 0;
 }
