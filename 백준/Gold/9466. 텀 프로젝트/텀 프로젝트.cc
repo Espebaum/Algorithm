@@ -18,7 +18,6 @@ using namespace std;
 
 int T, n;
 int arr[100100];
-// int vis[100100];
 int tp[100100];
 int p[100100];
 
@@ -42,8 +41,8 @@ void    tUnion(int x, int y)
 
 int tFind(int x)
 {
-    if (tp[x] == x)
-        return x;
+    // if (tp[x] == x)
+    //     return x;
     return tp[x];
 }
 
@@ -69,9 +68,12 @@ int main()
             if (p[i] == i)
                 rot.push_back(i);
         }
+        // cout << rot.size() << '\n';
         for (int i = 0; i < rot.size(); i++) {
             int rst = rot[i];
+            // cout << "rst: " << rst << '\n';
             int st = rot[i];
+            // cout << "st: " << st << '\n';
             while (1) {
                 st = tFind(st);
                 arr[st] = 1;
